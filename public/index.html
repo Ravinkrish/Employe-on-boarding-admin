@@ -1,0 +1,554 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="helloApp">
+<head>
+    <title>Live Project Admin</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link rel="stylesheet" href="css/uniform.css" />
+    <link rel="stylesheet" href="css/chosen.min.css" />
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
+    <link href="newside/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+    <link href="newbuild/css/custom.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/simple-sidebar.css"/>
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+    <link rel="stylesheet" href="css/searchbox.css" />
+    <link rel="stylesheet" href="css/ngtoast.css" />
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,700,800' rel='stylesheet' type='text/css'>
+    <!--<link rel="stylesheet" href="js/datepicker/datepicker.css">-->
+
+
+    <script>document.write('<base href="' + document.location + '" />');</script>
+
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/chosen/1.1.0/chosen.jquery.min.js"></script>
+
+
+    <script src="https://netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+
+    <script src="graphfiles/Chart.min.js"></script>
+    <!--<script src="js/bootstrap.bundle.min.js"></script>-->
+    <script src="graphfiles/jquery.sparkline.min.js"></script>
+
+    <script src="graphfiles/jquery.flot.js"></script>
+    <script src="graphfiles/jquery.flot.time.js"></script>
+    <script src="graphfiles/date.js"></script>
+
+
+    <script src="lib/fastclick.js"></script>
+    <script src="js/toastmin.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular.min.js"></script>
+
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.2.10/angular-ui-router.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.19.1/moment.min.js"></script>
+   <!--<script src="js/datepicker/datepicker.js"></script>-->
+
+
+
+
+
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+
+    <script src="http://d3js.org/d3.v3.min.js"></script>
+    <!--<script src="http://d3js.org/d3.v3.min.js"></script>-->
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/chosen/1.1.0/chosen.min.css">
+    <link rel="image_src" href="https://cdnjs.cloudflare.com/ajax/libs/chosen/1.1.0/chosen-sprite.png">
+    <script src="https://code.highcharts.com/highcharts.js"></script>
+    <script src="https://code.highcharts.com/modules/exporting.js"></script>
+
+    <!--controller-clientside-->
+
+    <script type="text/javascript">
+var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+(function(){
+var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+s1.async=true;
+s1.src='https://embed.tawk.to/5a06a0d0198bd56b8c03a810/default';
+s1.charset='UTF-8';
+s1.setAttribute('crossorigin','*');
+s0.parentNode.insertBefore(s1,s0);
+})();
+</script>
+
+
+
+
+
+    <style type="text/css">
+
+button{
+float:left;
+margin-bottom:20px;
+}
+.main_container
+{
+min-height:100%;
+ box-sizing: border-box;
+}
+ .node circle {
+   fill: #fff;
+   stroke: steelblue;
+   stroke-width: 3px;
+ }
+
+ .node text { font: 12px sans-serif; }
+
+ .link {
+   fill: none;
+   stroke: #ccc;
+   stroke-width: 2px;
+ }
+        .arrow-up
+
+        {
+            width:0px;
+            height:0px;
+            border-left:5px solid transparent;
+            border-right:5px solid transparent;
+            border-bottom:10px solid black;
+        }
+        .arrow-down
+        {
+            width:0px;
+            height:0px;
+            border-left:5px solid transparent;
+            border-right:5px solid transparent;
+            border-top:10px solid black;
+        }
+
+
+        .search input[type=text] {
+            max-width: 250px;
+            height:35px;
+            box-sizing: border-box;
+            border: 2px solid #799fa9;
+            border-radius: 4px;
+            font-size: 16px;
+            background-color: white;
+            background-image:url('css/searchbutton.gif');
+            background-position: 5px 7px;
+            background-repeat: no-repeat;
+            padding: 12px 20px 12px 40px;
+               -webkit-transition: width 0.4s ease-in-out;
+            transition: width 0.4s ease-in-out;
+            float:right;
+        }
+
+        .jumbotron
+{
+background-color:transparent !important;
+border:1px solid #ddd;
+box-shadow:1px 1px 10px;
+}
+.modal {
+  width: 500px;
+  margin: auto;
+  overflow:unset;
+}
+
+
+
+    .w3-card-4
+    {
+width:30%;
+display:inline-block;
+margin:10px;
+    }
+
+
+    .nav-tabs {
+    display: inline-block;
+    border: 1px solid #ddd;
+    border-radius:20px;
+    margin-left:-18px
+    }
+
+ .nav-tabs>li>a:hover{
+    color: #555;
+    background-color: #fff;
+    border: 1px solid black;
+    border-bottom-color: transparent;
+    cursor: default;
+}
+.nav-tabs>li>a:focus,.nav>li>a:focus
+{
+color:#2196f3;
+background-color:white;
+}
+
+#user-nav {
+    z-index: -9;
+}
+
+
+.node circle {
+   fill: #fff;
+   stroke: steelblue;
+   stroke-width: 3px;
+ }
+
+ .node text { font: 12px sans-serif; }
+
+ .link {
+   fill: none;
+   stroke: #ccc;
+   stroke-width: 2px;
+ }
+
+ .arrow-up
+ {
+ width:0;
+ height:0;
+ border-left:5px solid transparent;
+ border-right:5px solid transparent;
+ border-bottom:10px solid black;
+ display:inline-block;
+ }
+  .arrow-down
+ {
+ width:0;
+ height:0;
+ border-left:5px solid transparent;
+ border-right:5px solid transparent;
+ border-top:10px solid black;
+ display:inline-block;
+ }
+ .mystyle
+ {
+ max-width:40%;
+ margin:0 auto;
+ }
+
+.table-responsive{
+overflow-x:hidden
+}
+@media (min-width: 768px)
+{
+.navbar-nav.navbar-right:last-child {
+    margin-right:0px;
+}
+   }
+    </style>
+
+
+
+
+    <script src="https://d3js.org/d3.v3.min.js"></script>
+
+
+</head>
+
+<body class="nav-md"ssss>
+<div class="container body">
+    <div class="main_container">
+        <div class="col-md-3 left_col menu_fixed">
+            <div class="left_col scroll-view">
+                <div class="navbar nav_title display" style="border: 0;">
+                    <a href="index.html" class="site_title"><i class="fa fa-paw"></i> <span style="font-size:16px;">Resource Management</span></a>
+                </div>
+
+                <div class="clearfix"></div>
+
+                <!-- menu profile quick info -->
+                <div class="profile clearfix">
+                    <div class="profile_pic">
+                        <img src="images/Dshan.jpg" alt="..." class="img-circle profile_img">
+                    </div>
+                    <div class="profile_info">
+                        <span>Welcome,</span>
+                        <h2> ADMIN</h2>
+                    </div>
+                </div>
+                <!-- /menu profile quick info -->
+
+                <br />
+
+                <!-- sidebar menu -->
+                <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
+                    <div class="menu_section">
+                        <!--<h3>ADMIN</h3>-->
+                        <ul class="nav side-menu">
+                            <li><a><i class="fa fa-home"></i> HOME <span class="fa fa-chevron-down"></span></a>
+                                <ul class="nav child_menu">
+                                    <li><a ui-sref="dashboard">Dashboard</a></li>
+                                    <!--<li><a ui-sref="companydetails.companystructure">Companystructure</a></li>-->
+
+                                </ul>
+                            </li>
+                            <li><a><i class="fa fa-cog"></i> SETTINGS <span class="fa fa-chevron-down"></span></a>
+                                <ul class="nav child_menu">
+                                    <li><a ui-sref="jobdetailssetup.jobdetails">Job details settings</a></li>
+                                    <li><a ui-sref="qualification.skills">Qualification settings</a></li>
+                                    <li><a ui-sref="trainingsetup.courses">Training settings</a></li>                                                                                                      <!--<li><a ui-sref="projectclient.client">project details </a></li>-->
+                                    <li><a ui-sref="projectclient.client">Client settings </a></li>
+
+                                </ul>
+                            </li>
+                            <li><a><i class="fa fa-desktop"></i> EMPLOYEE SETTINGS <span class="fa fa-chevron-down"></span></a>
+                                <ul class="nav child_menu">
+                                    <li><a ui-sref="employee.employeess">Onboard Employees</a></li>
+                                    <li><a ui-sref="employeeproject">Employee projects</a></li>
+                                    <li><a ui-sref="status">Employee status</a></li>
+                                    <li><a ui-sref="employeereleave.releaveinfo">Employee Exit</a></li>
+                                    <li><a ui-sref="employeerating.employeeratingpermonth">Employee Rating</a></li>
+                                </ul>
+                            </li>
+                            <li><a><i class="fa fa-home"></i> Registered Users <span class="fa fa-chevron-down"></span></a>
+                                <ul class="nav child_menu">
+                                    <li><a ui-sref="registeredusers">Registered Users</a></li>
+                                    <!--<li><a ui-sref="companydetails.companystructure">Companystructure</a></li>-->
+
+                                </ul>
+                            </li>
+
+
+
+                        </ul>
+                    </div>
+
+                </div>
+                <!-- /sidebar menu -->
+
+                <!-- /menu footer buttons -->
+                <div class="sidebar-footer hidden-small">
+                    <a data-toggle="tooltip" data-placement="top" title="Settings">
+                        <span class="glyphicon glyphicon-cog" aria-hidden="true"></span>
+                    </a>
+                    <a data-toggle="tooltip" data-placement="top" title="FullScreen">
+                        <span class="glyphicon glyphicon-fullscreen" aria-hidden="true"></span>
+                    </a>
+                    <a data-toggle="tooltip" data-placement="top" title="Lock">
+                        <span class="glyphicon glyphicon-eye-close" aria-hidden="true"></span>
+                    </a>
+                    <a data-toggle="tooltip" data-placement="top" title="Logout" href="login.html">
+                        <span class="glyphicon glyphicon-off" aria-hidden="true"></span>
+                    </a>
+                </div>
+                <!-- /menu footer buttons -->
+            </div>
+        </div>
+
+        <!-- top navigation -->
+        <div class="top_nav">
+            <div class="nav_menu display">
+                <nav>
+                    <div class="nav toggle">
+                        <a id="menu_toggle"><i class="fa fa-bars"></i></a>
+                    </div>
+
+                    <ul class="nav navbar-nav navbar-right display">
+                        <li class="">
+                            <a class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                                <img src="images/Dshan.jpg" alt="" >Admin
+                                <span class=" fa fa-angle-down"></span>
+                            </a>
+                            <ul class="dropdown-menu dropdown-usermenu pull-right">
+                                <li><a href="javascript:;"> Profile</a></li>
+                                <li>
+                                    <a href="javascript:;">
+                                        <span class="badge bg-red pull-right">50%</span>
+                                        <span>Settings</span>
+                                    </a>
+                                </li>
+                                <li><a href="javascript:;">Help</a></li>
+                                <li><a ui-sref="login"><i class="fa fa-sign-out pull-right"></i> Log Out</a></li>
+                            </ul>
+                        </li>
+
+                        <li role="presentation" class="dropdown">
+                            <a href="javascript:;" class="dropdown-toggle info-number" data-toggle="dropdown" aria-expanded="false">
+                                <i class="fa fa-envelope-o"></i>
+                                <span class="badge bg-green">6</span>
+                            </a>
+                            <ul id="menu1" class="dropdown-menu list-unstyled msg_list" role="menu">
+                                <li>
+                                    <a>
+                                        <!--<span class="image"><img src="images/img.jpg" alt="Profile Image" /></span>-->
+                                        <span>
+                          <span>John Smith</span>
+                          <span class="time">3 mins ago</span>
+                        </span>
+                                        <span class="message">
+                          Film festivals used to be do-or-die moments for movie makers. They were where...
+                        </span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a>
+                                        <span class="image"><img src="images/img.jpg" alt="Profile Image" /></span>
+                                        <span>
+                          <span>John Smith</span>
+                          <span class="time">3 mins ago</span>
+                        </span>
+                                        <span class="message">
+                          Film festivals used to be do-or-die moments for movie makers. They were where...
+                        </span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a>
+                                        <span class="image"><img src="images/img.jpg" alt="Profile Image" /></span>
+                                        <span>
+                          <span>John Smith</span>
+                          <span class="time">3 mins ago</span>
+                        </span>
+                                        <span class="message">
+                          Film festivals used to be do-or-die moments for movie makers. They were where...
+                        </span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a>
+                                        <span class="image"><img src="images/img.jpg" alt="Profile Image" /></span>
+                                        <span>
+                          <span>John Smith</span>
+                          <span class="time">3 mins ago</span>
+                        </span>
+                                        <span class="message">
+                          Film festivals used to be do-or-die moments for movie makers. They were where...
+                        </span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <div class="text-center">
+                                        <a>
+                                            <strong>See All Alerts</strong>
+                                            <i class="fa fa-angle-right"></i>
+                                        </a>
+                                    </div>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+
+        <div class="right_col" role="main">
+            <div class="">
+                <div class="page-title">
+                    <div ui-view></div>
+                </div>
+            </div>
+        </div>
+
+        <footer>
+            <div class="pull-right">
+                <a href="https://colorlib.com"></a>
+            </div>
+            <div class="clearfix"></div>
+        </footer>
+        <!-- /footer content -->
+    </div>
+</div>
+
+
+
+
+</body>
+
+
+<script type="text/javascript" src="js/app.js"></script>
+<script type="text/javascript" src="js/dropdown/dropdowncontroller.js"></script>
+<script src="directives/toasterdirective.js"></script>
+<script src="js/angular-chosen.js"></script>
+<script src="js/angular-chosen.min.js"></script>
+
+
+<!--webcamp-->
+
+    <!--directives-->
+<script type="text/javascript" src="js/controller/projectclient.js"></script>
+<script type="text/javascript" src="js/controller/projectcontroller.js"></script>
+<script type="text/javascript" src="js/controller/routeController.js"></script>
+<script type="text/javascript" src="js/controller/logincontroller.js"></script>
+<script type="text/javascript" src="js/controller/employeeprojectcontroller.js"></script>
+<script type="text/javascript" src="js/employeecontroller/employeecontroller.js"></script>
+<script type="text/javascript" src="js/controller/dashboard2.js"></script>
+<script type="text/javascript" src="js/controller/userdailytaskcontroller.js"></script>
+<script type="text/javascript" src="js/controller/datetimescript.js"></script>
+<script type="text/javascript" src="js/controller/certificationcontroller.js"></script>
+<script type="text/javascript" src="js/controller/companygraph.js"></script>
+<script type="text/javascript" src="js/controller/companystructurecontroller.js"></script>
+<script type="text/javascript" src="js/controller/employeementcontroller.js"></script>
+<script type="text/javascript" src="js/controller/jobdetailscontroller.js"></script>
+<script type="text/javascript" src="js/controller/languagecontroller.js"></script>
+<script type="text/javascript" src="js/controller/paygradecontroler.js"></script>
+<script type="text/javascript" src="js/controller/quali-educationcontroller.js"></script>
+<script type="text/javascript" src="js/controller/qualificationcontroller.js"></script>
+<script type="text/javascript" src="js/controller/trainingsessioncontroller.js"></script>
+<script type="text/javascript" src="js/controller/trainingsetupcontroller.js"></script>
+<script type="text/javascript" src="js/controller/releavecontroller.js"></script>
+<script type="text/javascript" src="js/controller/employeeratingcontroller.js"></script>
+
+
+
+
+
+<script src="directives/fromDirective/addFrom.js"></script>
+<script src="directives/fromDirective/editFrom.js"></script>
+
+
+<script src="js/tableExport/tableExport.js"></script>
+<script src="js/tableExport/jquery.base64.js"></script>
+<script src="js/tableExport/sprintf.js"></script>
+<script src="js/tableExport/jspdf.js"></script>
+<script src="js/tableExport/base64.js"></script>
+
+<script src="directives/dirPagination.js"></script>
+
+<script src="https://d3js.org/d3.v3.min.js"></script>
+
+
+
+
+
+
+
+<!--servcies-->
+<script src="js/service/fromService.js"></script>
+<script src="js/service/routeservices.js"></script>
+<script src="js/service/projectclient.js"></script>
+<script src="js/service/projectservice.js"></script>
+<script src="js/service/emloyeeprojectservice.js"></script>
+<script src="js/employeeservice/employeeservice.js"></script>
+<script src="js/service/webcamservice.js"></script>
+<script src="js/service/certificationservice.js"></script>
+<script src="js/service/jobdetailsservice.js"></script>
+<script src="js/service/languageservice.js"></script>
+<script src="js/service/paygradeservice.js"></script>
+<script src="js/service/quali-educationservice.js"></script>
+<script src="js/service/qualificationservice.js"></script>
+<script src="js/service/trainingsessionservice.js"></script>
+<script src="js/service/trainingsetupservice.js"></script>
+<script src="js/service/usersalaryService.js"></script>
+<script src="js/service/employeementservice.js"></script>
+<script src="js/service/clientService.js"></script>
+<script src="js/service/userdailytaskservice.js"></script>
+<script src="js/service/releaveinfoservice.js"></script>
+<script src="js/service/employeeratingservice.js"></script>
+
+
+
+
+
+
+
+<script src="webcamapp/vendors/webcamjs/webcam.min.js"></script>
+<script src="webcamscript/ng-webcam.js"></script>
+<script src="webcamapp/angular/controller.js"></script>
+<script src="directives/fromDirective/sortingdirective.js"></script>
+<script src="newbuild/js/custom.min.js"></script>
+<script src="js/datetime-picker.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/1.2.0/ui-bootstrap-tpls.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.19.3/moment.js"></script>
+
+
+</html>

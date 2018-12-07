@@ -1,0 +1,179 @@
+
+<br/><br/>
+<div class="loginheader">
+<nav class="navbar navbar-inverse">
+    <div class="container-fluid">
+        <div class="navbar-header">
+<img src="photos/dsha.png" alt="logo" height="60px" width="300px">
+        </div>
+
+        <ul class="nav navbar-nav navbar-right">
+            <li><a style="color:white;" href="#"><span class="glyphicon glyphicon-user"></span>register</a></li>
+            <li><a href="#"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+        </ul>
+    </div>
+</nav>
+</div>
+
+
+<br/><br/>
+<div class="container" ng-controller="loginController" style="margin-left: -90px;">
+
+
+    <div class="omb_login">
+        <h3 class="omb_authTitle">Login or <a href="#">Sign up</a></h3>
+        <div class="row omb_row-sm-offset-3 omb_socialButtons">
+            <div class="col-xs-4 col-sm-2">
+                <a href="#" class="btn btn-lg btn-block omb_btn-facebook">
+                    <i class="fa fa-facebook visible-xs"></i>
+                    <span class="hidden-xs">Facebook</span>
+                </a>
+            </div>
+            <div class="col-xs-4 col-sm-2">
+                <a href="#" class="btn btn-lg btn-block omb_btn-twitter">
+                    <i class="fa fa-twitter visible-xs"></i>
+                    <span class="hidden-xs">Twitter</span>
+                </a>
+            </div>
+            <div class="col-xs-4 col-sm-2">
+                <a href="#" class="btn btn-lg btn-block omb_btn-google">
+                    <i class="fa fa-google-plus visible-xs"></i>
+                    <span class="hidden-xs">Google+</span>
+                </a>
+            </div>
+        </div>
+
+        <div class="row omb_row-sm-offset-3 omb_loginOr">
+            <div class="col-xs-12 col-sm-6">
+                <hr class="omb_hrOr">
+                <span class="omb_spanOr">or</span>
+            </div>
+        </div>
+
+        <div class="row omb_row-sm-offset-3">
+            <div class="col-xs-12 col-sm-6">
+                <form class="omb_loginForm">
+                    <div class="input-group">
+                        <span class="input-group-addon"><i class="fa fa-user"></i></span>
+                        <input type="text" class="form-control" name="username" placeholder="email address">
+                    </div>
+                    <span class="help-block"></span>
+
+                    <div class="input-group">
+                        <span class="input-group-addon"><i class="fa fa-lock"></i></span>
+                        <input  type="password" class="form-control" name="password" placeholder="Password">
+                    </div>
+                    <span class="help-block"></span>
+
+                    <button class="btn btn-lg btn-primary btn-block" ng-click="loginpage()">Login</button>
+                </form>
+            </div>
+        </div>
+        <div class="row omb_row-sm-offset-3">
+            <div class="col-xs-12 col-sm-3">
+                <label class="checkbox">
+                    <input type="checkbox" value="remember-me">Remember Me
+                </label>
+            </div>
+            <div class="col-xs-12 col-sm-3">
+                <p class="omb_forgotPwd">
+                    <a href="#">Forgot password?</a>
+                </p>
+            </div>
+        </div>
+    </div>
+
+
+
+</div>
+
+<div class="foot">
+    <p>Footer</p>
+</div>
+
+
+
+<style>
+.container11 {
+    display: none;
+    }
+#content{
+
+border:0px;
+}
+
+ .the-legend {
+    display: none;
+    }
+
+h1{
+display: none;
+
+}
+
+#sidebar-menu{
+display: none;
+
+}
+.display{
+display: none;
+
+}
+.profile{
+display: none;
+}
+.sidebar-footer{
+display: none;
+
+}
+.top_nav{
+display: none;
+
+}
+
+#menu_toggle{
+display: none;
+
+}
+
+.loginheader{
+margin-bottom: 88px;
+    margin-top: -60px;
+    width: 107%;
+    position: left;
+    margin-right: 273px;
+    margin-left: -28px;
+}
+
+.navbar-inverse{
+    background-color: #222;
+    border-color: #080808;
+    position: absolute;
+    width: 100%;
+    z-index: 1;
+    margin-left: -222px;
+}
+
+.left_col
+{ background-color:white; }
+.nav.navbar-nav>li>a
+{
+color:white!important;
+}
+
+
+.foot{
+   position: fixed;
+   left: 0;
+   bottom: 0;
+   width: 100%;
+   background-color: black;
+   color: white;
+   text-align: center;
+   z-index:1;
+   height:5%;
+}
+
+
+
+</style>

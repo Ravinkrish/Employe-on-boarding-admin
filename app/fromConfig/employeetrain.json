@@ -1,0 +1,28 @@
+{
+
+
+  "Employee": {
+    "type": "String",
+    "description": "Enter Employee ",
+    "modelValue": "",
+    "readonly":false
+  },
+  "Employeeid": {
+    "type": "Number",
+    "description": "Enter Number",
+    "modelValue": "",
+    "readonly":false
+  },
+  "Training": {
+    "type": "String",
+    "description": "Enter Training Session",
+    "modelValue": "",
+    "readonly":true
+  },
+  "Status": {
+    "type": "String",
+    "description": "Enter Status",
+    "modelValue": "",
+    "readonly":false
+  }
+  }

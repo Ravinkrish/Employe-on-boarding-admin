@@ -1,0 +1,20 @@
+{
+  "Employeeid": {
+    "type": "String",
+    "description": "Enter Qualification ",
+    "modelValue": "",
+    "readonly": false
+  },
+  "Ratingdate": {
+    "type": "String",
+    "description": "Enter Certification",
+    "modelValue": "",
+    "readonly":false
+  },
+  "Emploeerating": {
+    "type": "String",
+    "description": "Enter Description",
+    "modelValue": "",
+    "readonly":true
+  }
+  }

@@ -1,0 +1,389 @@
+<script>
+(function(){
+var acc = document.getElementsByClassName("accordion");
+var i;
+
+for (i = 0; i < acc.length; i++) {
+  acc[i].onclick = function() {
+    this.classList.toggle("active");
+    var panel = this.nextElementSibling;
+    if (panel.style.maxHeight){
+      panel.style.maxHeight = null;
+    } else {
+      panel.style.maxHeight = panel.scrollHeight + "px";
+    }
+  }
+}
+})();
+</script>
+
+
+
+
+<div class="container" ng-show="tablevisible">
+    <div class="jumbotron">
+        <toaster-dir options="dirOptions"></toaster-dir>
+<!--{{employeeDetails.detailsArray}}-->
+        <!--config-->
+
+        <!--{{skillobject}}-->
+
+
+
+
+
+
+
+        <div class="col-md-3 col-sm-3 col-xs-8 form-group pull-right top_search">
+            <div class="input-group">
+                <input type="text" class="form-control" placeholder="Search for..." ng-model="searchtext">
+                <span class="input-group-btn">
+                      <button class="btn btn-default" type="button">Go!</button>
+                    </span>
+            </div>
+        </div>
+        <button ng-click="showhide()"class="w3-button w3-green w3-border">Add New&nbsp;<i class="fa fa-plus" aria-hidden="true"></i></button>
+        <div class="mystyle">
+        <button data-ng-click="exportAction('csv')"class="w3-button  w3-indigo">CSV</button>
+        <button data-ng-click="exportAction('excel')"class="w3-button  w3-indigo">Excel</button>
+        <button data-ng-click="exportAction('doc')"class="w3-button  w3-indigo"> Doc</button>
+        <button data-ng-click="exportAction('pdf')"class="w3-button  w3-indigo">Pdf</button><br><br>
+        </div>
+        <div class="text-center">
+
+            <table class="table table-striped table-bordered" export-table>
+
+                <thead>
+                <tr>
+                    <th ng-repeat="formhead in employeeobject"  ng-if="formhead.name=='Name'||formhead.name=='Employeenumber'||formhead.name=='Mobilephone'||formhead.name=='Emailid'||formhead.name=='Department'||formhead.name=='Designation'||formhead.name=='action'" >{{formhead.name}}</th>
+                    <th>action</th>
+
+                </tr>
+                </thead>
+
+                <tbody>
+                <tr dir-paginate="employee in employeeDetails.detailsArray|filter:searchtext|itemsPerPage:5">
+
+                <tr ng-repeat="employee in employeeDetails.detailsArray track by $index">
+                    <td ng-repeat="(key, value) in employee"  ng-if="key=='Name'||key=='Employeenumber'||key=='Mobilephone'||key=='Emailid'||key=='Department'||key=='Designation'||key=='action'">{{value}}</td>
+                    <td class="text-center">
+                        <a class='btn btn-info btn-xs' ng-click="getemployeeDetailsById(employee)">
+                            <span class="glyphicon glyphicon-edit"></span> Edit
+                        </a>
+
+                        <a class="btn btn-danger btn-xs" data-toggle="modal" ng-click="setemployeeDetailsIdFroDelete(employee._id)"  data-target="#myModal">
+                        <span class="glyphicon glyphicon-remove">
+                        </span> Del</a>
+                        <a class="btn btn-success btn-xs" data-ng-click="getEmailIdByIndex(employee.Emailid,employee.Employeenumber)" ng-hide="{{employee.Emailsent}}">
+                        <span class="glyphicon glyphicon-envelope">
+                        </span>Send Invite</a>
+                        <a class="btn btn-success btn-xs" data-ng-click="viewEmployeeDetails(employee.Employeenumber)">
+                        <span class="glyphicon glyphicon-envelope">
+                        </span>view</a>
+
+                        <a class="btn btn-success btn-xs" data-ng-click="approveEmployee(employee.Employeenumber)" ng-hide="{{employee.isapproved}}">
+                        <span class="glyphicon glyphicon-envelope">
+                        </span>approve</a>
+
+                    </td>
+
+                </tr>
+                </tbody>
+
+            </table>
+        </div>
+        <dir-pagination-controls class="paging"
+                max-size="2"
+                direction-links="true"
+                boundary-links="true">
+        </dir-pagination-controls>
+
+
+    </div>
+
+
+
+
+</div>
+
+<div class="modal fade" id="myModal" role="dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+            <h4 class="modal-title">Confirm Deletion</h4>
+        </div>
+        <div class="modal-body">
+            <p>Are you sure you want to delete this item ?</p>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal"  id="btnClose">Close</button>
+            <button type="submit" class="btn btn-default" ng-click="deleteemployeeDetails(employeeDetails.mongodbIdForDelete)">
+                Delete</button>
+
+        </div>
+    </div>
+
+</div>
+
+
+<!--edit copy form-->
+<div class="container" ng-show="formvisible">
+    <div class="jumbotron text-center">
+
+
+        <button class="btn" data-ng-click="showhide()" style="position: relative;margin-bottom: -17px;margin-left: 900px;">back to main</button>
+        <button class="accordion">Add Employee</button>
+        <div class="panel">
+        <div class="jumbotron text-center">
+            <div ui-view="webcam"></div>
+            <main class="app container">
+                <!--{{employeeJsonConfig}}-->
+                <json-from json-config=employeeobject></json-from>
+
+                <div class="form-group">
+                    <div class="col-sm-offset-6 col-sm-4">
+                        <button type="close" class="btn " ng-click="showhide()"><i class="fa fa-times" aria-hidden="true"></i>close</button>
+                        <button type="submit" class="btn btn-primary" ng-click="saveemployee(employeeJsonConfig)"><i class="fa fa-floppy-o" aria-hidden="true">save</i></button>
+                        <!--<button class="btn" data-ng-click="showhide()">back to main</button>-->
+                    </div>
+                </div>
+        </form>
+
+            </main>
+        </div>
+    </div>
+
+
+        <button class="btn" data-ng-click="showhide()" style="position:relative;margin-bottom:-17px;margin-left: 900px;">back to main</button>
+        <button class="accordion">Add Images</button>
+       <div class="panel webcamdesing" ng-controller="webcamController as vm">
+
+        <div class="jumbotron text-center">
+            <button class="btn btn-primary" data-ng-click="cameraOnCondition()">Start Camera</button>
+            <div ui-view="webcam"></div>
+            <main class="app container">
+                <div class="row">
+
+
+                    <!--{{src}}-->
+                    <div class="col-md-12" style="text-align: center">
+                        <ng-webcam config="vm.config"
+                                   on-error="vm.onError(err)"
+                                   on-load="vm.onLoad()"
+                                   on-live="vm.onLive()"
+                                   on-capture-progress="vm.onCaptureProgress(src, progress)"
+                                   on-capture-complete="vm.onCaptureComplete(src)"></ng-webcam>
+                    </div>
+                    <div class="col-md-12">
+                        <p id="progress">Progress: {{vm.progress}}%</p>
+                    </div>
+                    <div id="result" class="row"></div>
+                     <div class="col-md-12" ng-if="vm.showButtons">
+                        <button class="btn btn-primary"  ng-disabled="!vm.captureButtonEnable" ng-click="vm.capture()">Capture</button>
+                        <button class="btn btn-primary"  ng-click="vm.off()">Camera off</button>
+                        <button class="btn btn-primary"  ng-click="vm.on()">Camera on</button>
+                         <button class="btn btn-primary" data-ng-click="saveimages()">saveimages</button>
+                    </div>
+
+
+
+
+        </div>
+
+            </main>
+        </div>
+    </div>
+
+
+        <button class="btn" data-ng-click="showhide()" style="position:relative;margin-bottom:-17px;margin-left: 900px;">back to main</button>
+        <button class="accordion">Add skills</button>
+        <div class="panel">
+            <div class="jumbotron text-center">
+
+                <!--{{skillsJsonConfig}}-->
+                <json-from json-config=skillobject></json-from>
+                <!--{{skillsJsonConfig}}-->
+
+                <div class="form-group">
+                    <div class="col-sm-offset-6 col-sm-4">
+                        <!--<button type="close" class="btn " ng-click="showhide()"><i class="fa fa-times" aria-hidden="true" ng-click="showhide()"></i>close</button>-->
+                        <button  class="btn btn-primary" ng-click="saveemployeeskillsssss(employeeJsonConfig)"><i class="fa fa-floppy-o">save</i></button>
+                        <button  class="btn btn-primary" ng-click="saveemployeeskillsssss(employeeJsonConfig)"><i class="fa fa-floppy-o">Add More Skills</i></button>
+
+                        <!--<button class="btn" data-ng-click="showhide()">back to main</button>-->
+                    </div>
+                </div>
+            </div>
+            </form>
+        </div>
+
+        <button class="btn" data-ng-click="showhide()" style="position: relative;margin-bottom: -17px;margin-left:900px;">back to main</button>
+        <button class="accordion">Add Education</button>
+        <div class="panel">
+            <div class="jumbotron text-center">
+
+                <!--{{emeducationJsonConfig}}-->
+                <json-from json-config=qualificationobject></json-from>
+                <!--{{emeducationJsonConfig}}-->
+
+                <div class="form-group">
+                    <div class="col-sm-offset-6 col-sm-4">
+                        <!--<button type="close" class="btn" ><i class="fa fa-times" aria-hidden="true"></i>close</button>-->
+                        <button type="submit" class="btn btn-primary" ng-click="saveemployeequalification(employeeJsonConfig)"><i class="fa fa-floppy-o" aria-hidden="true">save</i></button>
+                        <!--<button class="btn" data-ng-click="showhide()">back to main</button>-->
+                    </div>
+                </div>
+            </div>
+            </form>
+
+        </div>
+
+        <button class="btn" data-ng-click="showhide()" style="position: relative;margin-bottom: -17px;margin-left: 900px;">back to main</button>
+        <button class="accordion">Add certification</button>
+        <div class="panel">
+            <div class="jumbotron text-center">
+
+                <!--{{emcertificationJsonConfig}}-->
+                <json-from json-config=Certificationobject></json-from>
+                <!--{{emcertificationJsonConfig}}-->
+
+                <div class="form-group">
+                    <div class="col-sm-offset-6 col-sm-4">
+                        <!--<button type="close" class="btn"><i class="fa fa-times" aria-hidden="true"></i>close</button>-->
+                        <button type="submit" class="btn btn-primary" ng-click="saveemployeecertification(employeeJsonConfig)"><i class="fa fa-floppy-o" aria-hidden="true">save</i></button>
+                        <!--<button class="btn" data-ng-click="showhide()">back to main</button>-->
+                    </div>
+                </div>
+            </div>
+            </form>
+        </div>
+
+        <button class="btn" data-ng-click="showhide()"  style="position: relative;margin-bottom: -17px;margin-left: 900px;">back to main</button>
+        <button class="accordion">Add  languages</button>
+        <div class="panel">
+            <div class="jumbotron text-center">
+
+                <!--{{languageJsonConfig}}-->
+                <json-from json-config=Languageobject></json-from>
+                <!--{{languageJsonConfig}}-->
+
+                <div class="form-group">
+                    <div class="col-sm-offset-6 col-sm-4">
+                        <!--<button type="close" class="btn"><i class="fa fa-times" aria-hidden="true"></i>close</button>-->
+                        <button type="submit" class="btn btn-primary" ng-click="saveemployeelanguage(employeeJsonConfig)"><i class="fa fa-floppy-o" aria-hidden="true">save</i></button>
+                        <!--<button class="btn" data-ng-click="showhide()">back to main</button>-->
+                    </div>
+                </div>
+            </div>
+            </form>
+        </div>
+
+        <button class="btn" data-ng-click="showhide()"  style="position: relative;margin-bottom: -17px;margin-left: 900px;">back to main</button>
+        <button class="accordion">Add  dependents</button>
+        <div class="panel">
+            <div class="jumbotron text-center">
+
+                <!--{{dependentJsonConfig}}-->
+                <json-from json-config=DependentRelationshipobject></json-from>
+                <!--{{dependentJsonConfig}}-->
+                <div class="form-group">
+                    <div class="col-sm-offset-6 col-sm-4">
+                        <!--<button type="close" class="btn"><i class="fa fa-times" aria-hidden="true" ></i>close</button>-->
+                        <button type="submit" class="btn btn-primary" ng-click="saveemployeedependentdetails(employeeJsonConfig)"><i class="fa fa-floppy-o" aria-hidden="true">save</i></button>
+                        <!--<button class="btn" data-ng-click="showhide()">back to main</button>-->
+                    </div>
+                </div>
+            </div>
+            </form>
+        </div>
+
+        <button class="btn" data-ng-click="showhide()"  style="position: relative;margin-bottom: -17px;margin-left: 900px;">back to main</button>
+        <button class="accordion">Add  emergency</button>
+        <div class="panel">
+            <div class="jumbotron text-center">
+
+                <!--{{emergencycontactJsonConfig}}-->
+                <json-from json-config=Emergencyobject></json-from>
+                <!--{{emergencycontactJsonConfig}}-->
+                <div class="form-group">
+                    <div class="col-sm-offset-6 col-sm-4">
+                        <!--<button type="close" class="btn"><i class="fa fa-times" aria-hidden="true"></i>close</button>-->
+                        <button type="submit" class="btn btn-primary" ng-click="saveemployeeemergencydetails(employeeJsonConfig)"><i class="fa fa-floppy-o" aria-hidden="true">save</i></button>
+                        <!--<button class="btn" data-ng-click="showhide()">back to main</button>-->
+                    </div>
+                </div>
+            </div>
+            </form>
+
+        </div>
+        <button class="btn" data-ng-click="showhide()"  style="position: relative;margin-bottom: -17px;margin-left: 900px;">back to main</button>
+        <button class="accordion">Add documents</button>
+        <div class="panel">
+            <div class="jumbotron text-center">
+
+                <!--{{documentJsonConfig}}-->
+                <json-from json-config=Documentobject></json-from>
+                <!--{{documentJsonConfig}}-->
+
+                <div class="form-group">
+                    <div class="col-sm-offset-6 col-sm-4">
+                        <!--<button type="close" class="btn"><i class="fa fa-times" aria-hidden="true"></i>close</button>-->
+                        <button type="submit" class="btn btn-primary" ng-click="saveemployeedocumentdetails(employeeJsonConfig)"><i class="fa fa-floppy-o" aria-hidden="true">save</i></button>
+                        <!--<button class="btn" data-ng-click="showhide()">back to main</button>-->
+                    </div>
+                </div>
+            </div>
+            </form>
+
+        </div>
+        <button class="btn" data-ng-click="showhide()"  style="position: relative;margin-bottom: -17px;margin-left: 900px;">back to main</button>
+        <button class="accordion">Add  Bank Account Details</button>
+    <div class="panel">
+        <div class="jumbotron text-center">
+
+            <!--{{documentJsonConfig}}-->
+            <json-from json-config=BankAccountobject></json-from>
+            <!--{{documentJsonConfig}}-->
+
+            <div class="form-group">
+                <div class="col-sm-offset-6 col-sm-4">
+                    <!--<button type="close" class="btn"><i class="fa fa-times" aria-hidden="true"></i>close</button>-->
+                    <button type="submit" class="btn btn-primary" ng-click="saveemployeebankaccountdetails(employeeJsonConfig)"><i class="fa fa-floppy-o" aria-hidden="true">save</i></button>
+                </div>
+            </div>
+        </div>
+        </form>
+
+    </div>
+
+
+
+
+
+
+    </div>
+    <!--{{employeeJsonConfig}}-->
+
+</div>
+
+
+<div class="container" ng-show="form2visible">
+    <div class="jumbotron text-center">
+
+        <edit-from json-config="employeeEditJsonConfig"></edit-from>
+        <div class="form-group">
+            <div class="col-sm-offset-6 col-sm-4">
+                <button type="close" class="btn " ng-click="showhide2()"><i class="fa fa-times" aria-hidden="true">close</i></button>
+                <button type="submit" class="btn btn-primary"  ng-click="updateemployeeDetailsToDb(employeeEditJsonConfig)">
+                    Update</button>
+                <!--<button type="submit" class="btn btn-primary"  ng-click="updateemployeeDetailsToDb(employeeEditJsonConfig)">-->
+                <!--Update</button>-->
+            </div>
+        </div>
+        </form>
+    </div>
+</div>
+
+

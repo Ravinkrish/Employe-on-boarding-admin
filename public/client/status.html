@@ -1,0 +1,106 @@
+
+<style>
+.button {
+    background-color: #4CAF50; /* Green */
+    border: none;
+    color: white;
+    padding: 11px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+    border-radius: 7px;
+}
+
+.button2 {background-color: #008CBA;} /* Blue */
+.button3 {background-color: #f44336;} /* Red */
+.button4 {background-color: #16a085;; color: white;} /* Gray */
+.button5 {background-color: #16a085;} /* Black */
+
+
+#customers {
+    font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+}
+
+#customers td, #customers th {
+    border: 1px solid #ddd;
+    padding: 8px;
+}
+
+#customers tr:nth-child(even){background-color: #f2f2f2;}
+
+#customers tr:hover {background-color: #ddd;}
+
+#customers th {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    text-align: left;
+    background-color: #16a085;
+    color: white;
+}
+
+
+</style>
+
+<div id="content-header">
+    <div ><h3>Employee status <small>&nbsp;admin</small></h3> </div>
+</div>
+
+<div class="container-fluid">
+    <div class="row-fluid">
+        <div class="span12">
+            <ul class="nav nav-tabs">
+                <li><a  ui-sref=".employeess">Employee status</a></li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<table id="customers">
+    <tr>
+        <th>Employee Id</th>
+        <th>Employee Name</th>
+        <th>Date</th>
+        <th>Task</th>
+        <th>comment</th>
+    </tr>
+    <tr ng-repeat="task in dailyTaskArray">
+       <td>{{task.Employeeid}}</td>
+        <td>{{task.Employee}}</td>
+        <td>{{task.date}}</td>
+        <td>{{task.userdailytask}}</td>
+        <td>
+            <a class="btn btn-success btn-xs" data-toggle="modal" ng-click="setuserprojectsDetailsIdFroDelete(task._id)"  data-target="#myModal">
+                        <span class="glyphicon glyphicon-open">
+                        </span> Request discussion</a>
+
+            <a class="btn btn-primary btn-xs" data-toggle="modal" ui-sref="status2" ng-click="setuserprojectsDetailsIdFroDelete(task._id)"  data-target="#myModal">
+                        <span class="glyphicon glyphicon-eye-open">
+                        </span> view</a>
+
+            <a class="btn btn-success btn-xs" data-toggle="modal" ng-click="approveEmployeeDailyTask(task._id)">
+                        <span class="glyphicon glyphicon-ok">
+                        </span> Approval</a>
+
+            <a class="btn btn-danger btn-xs" data-toggle="modal" ng-click="approveEmployeeDailyTaskByMongodid(task._id)">
+                        <span class="glyphicon glyphicon-remove">
+                        </span> decline</a>
+
+        </td>
+
+    </tr>
+
+
+
+</table>
+
+<br/><br/>
+
+<button ui-sref="status2" class="button button4 " style="margin-left:450px;"> view full status</button>
+
+
+

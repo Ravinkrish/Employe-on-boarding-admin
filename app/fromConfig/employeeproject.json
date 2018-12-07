@@ -1,0 +1,28 @@
+{
+
+
+  "employeebasic": {
+    "type": "String",
+    "description": "Enter the Name",
+    "modelValue": "",
+    "readonly":false
+  },
+  "Employeeid": {
+    "type": "Number",
+    "description": "Enter Number",
+    "modelValue": "",
+    "readonly":false
+  },
+  "Project": {
+  "type": "String",
+  "description": "Enter the Address",
+  "modelValue": "",
+  "readonly":true
+},
+  "Details": {
+    "type": "String",
+    "description": "Enter the Details",
+    "modelValue": "",
+    "readonly":true
+  }
+  }

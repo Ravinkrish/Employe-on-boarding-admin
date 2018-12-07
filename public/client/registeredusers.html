@@ -1,0 +1,54 @@
+<style>
+
+.employee{
+display:none;
+}
+#customers {
+    font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+}
+
+#customers td, #customers th {
+    border: 1px solid #ddd;
+    padding: 8px;
+}
+
+#customers tr:nth-child(even){background-color: #f2f2f2;}
+
+#customers tr:hover {background-color: #ddd;}
+
+#customers th {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    text-align: left;
+    background-color: black;
+    color: white;
+}
+</style>
+<br/><br/>
+
+<br/><br/>
+<table id="customers">
+    <tr>
+        <th>FULLNAME</th>
+        <th>EMAIL</th>
+        <th>PASSWORD</th>
+        <th>EDUCATION</th>
+        <th>SKILLS</th>
+        <th>RESUME</th>
+        <th>action</th>
+    </tr>
+    <tr ng-repeat="employee in employeeList ">
+        <td>{{employee.fullName}}</td>
+        <td>{{employee.email}}</td>
+        <td>{{employee.password}}</td>
+        <td>{{employee.education}}</td>
+        <td>{{employee.skills}}</td>
+        <td ><img style="height:50px;width:50px;" src="data:image/jpeg;base64,{{employee.docUpload}}"></td>
+        <td>
+            <button class="btn btn-primary" >Confirm</button>
+            <!--<button class="btn btn-danger" >Delete</button>-->
+        </td>
+    </tr>
+</table>

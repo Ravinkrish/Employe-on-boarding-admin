@@ -1,0 +1,16 @@
+{
+
+
+  "Employeeid": {
+    "type": "Number",
+    "description": "Enter employeeid",
+    "modelValue": "",
+    "readonly":false
+  },
+  "Salary": {
+    "type": "String",
+    "description": "Enter Amount",
+    "modelValue": "",
+    "readonly":false
+  }
+}
